@@ -1,0 +1,31 @@
+<div class="well">
+  <h4>Dejanos tu consulta aqui</h4>
+  <br />
+  {{#if responseMessage}}
+
+        <br/>
+        <div class="alert alert-success">
+            <h4>Tu consulta ha sido enviada en la brevedad te responderemos</h4>
+            <p>ID-Referencia consulta: {{model.id}}</p>
+            <p>Direccion de correo: {{model.emailAddress}}</p>
+            <p>Mensaje: {{model.message}}</p>
+        </div>
+
+      {{else}}
+
+        <div class="form-group has-feedback {{if model.isValidEmail 'has-success'}}">
+            <label>Dirección de correo electronico*:</label>
+          {{input type="email" class="form-control" placeholder="ejemplo@ejemplo.com" value=model.emailAddress autofocus="autofocus"}}
+          {{#if model.isValidEmail}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
+        </div>
+        <div class="form-group has-feedback {{if model.isMessageEnoughLong 'has-success'}}">
+            <label>Tu consulta*:</label>
+          {{textarea class="form-control" placeholder="Tu consulta (por lo menos 5 caracteres)" rows="10" value=model.message}}
+          {{#if model.isMessageEnoughLong}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
+        </div>
+        <button class="btn btn-success btn btn pull-right btn-lg" {{action 'saveContact' model}} disabled={{model.isNotValid}}>Enviar Consulta</button>
+
+      {{/if}}
+  <br />
+  <br />
+</div>
