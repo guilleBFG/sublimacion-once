@@ -1,8 +1,7 @@
 <div class="well">
   <h4>Dejanos tu consulta aqui</h4>
   <br />
-  {{#if responseMessage}}
-
+      {{#if responseMessage}}
         <br/>
         <div class="alert alert-success">
             <h4>Tu consulta ha sido enviada en la brevedad te responderemos</h4>
@@ -11,7 +10,7 @@
             <p>Mensaje: {{model.message}}</p>
         </div>
 
-      {{else}}
+        {{else}}
 
         <div class="form-group has-feedback {{if model.isValidEmail 'has-success'}}">
             <label>Dirección de correo electronico*:</label>
@@ -24,7 +23,13 @@
           {{#if model.isMessageEnoughLong}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
         </div>
         <button class="btn btn-success btn btn pull-right btn-lg" {{action 'saveContact' model}} disabled={{model.isNotValid}}>Enviar Consulta</button>
-
+        <br />
+        <br />
+      {{/if}}
+      {{#if errorMessage}}
+        <div class="alert alert-danger">
+            <strong>Error de datos / datos incompeltos, por favor corrija</strong>
+        </div>
       {{/if}}
   <br />
   <br />
