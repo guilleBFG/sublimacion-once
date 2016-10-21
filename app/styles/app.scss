@@ -1,11 +1,10 @@
 @import "bootstrap";
+@import "colors";
+@import "carousel";
+@import "service-items";
 
 body
 {
-  background-color: #111111;
+  background-color: $black;
   padding-top: 70px;
-}
-
-.carousel-caption {
-  color: violet;
 }
