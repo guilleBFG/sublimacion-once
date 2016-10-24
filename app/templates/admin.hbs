@@ -1,0 +1,19 @@
+<div id="wrapper">
+	<form name="login-form" class="login-form" action="" method="post">
+		<div class="header">
+		<h1>Sitio restringido</h1>
+		<span>Ingrese su usuario administrador para ver el contenido</span>
+		</div>
+
+		<div class="content">
+    {{input type="text" class="input username" placeholder="ejemplo@ejemplo.com" value=model.emailAddress autofocus="autofocus"}}
+		<div class="user-icon" ></div>
+    {{input type="password" class="input password" placeholder="contraseña" value=model.password}}
+		<div class="pass-icon"></div>
+		</div>
+
+		<div class="footer">
+    <button class="btn btn-primary btn pull-right btn-lg" {{action 'logIn' model}}>Ingresar</button>
+		</div>
+	</form>
+</div>

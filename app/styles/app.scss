@@ -3,8 +3,12 @@
 @import "carousel";
 @import "service-items";
 @import "footer";
+@import "admin";
 body
 {
   background-color: $black;
   padding-top: 70px;
+}
+h1{
+  color: $white;
 }
