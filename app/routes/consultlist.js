@@ -9,5 +9,8 @@ export default Ember.Route.extend({
   },
   model(){
     return this.store.findAll('contact');
+  },
+  afterModel(){
+    this.get('session').close();
   }
 });
