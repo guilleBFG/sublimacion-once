@@ -1,28 +1,53 @@
 import Ember from 'ember';
-
 export default Ember.Route.extend({
+  firebaseApp: Ember.inject.service(),
+
   model(){
     return this.store.createRecord('admin');
   },
   actions: {
     logIn() {
-
-      let model = this.controller.get('model');
-
-      var user = this.get('store').query( 'admin', {
-        orderBy : 'emailAddress',
-        equalTo : model.get('emailAddress')
-      });
-      console.log(model.get('emailAddress'));
-      console.log(user.get('emailAddress'));
-      console.log(user.get('password'));
+        let model = this.controller.get('model');
+        var email = model.get('emailAddress');
+        var password = model.get('password');
+        this.get('session').open('firebase', {
+              provider: 'password',
+              email: email,
+              password: password
+            }).then(() => {
+              this.transitionTo('consultlist');
+            }.bind(this));
     },
-    registerUser(newUser){
-      newUser.save().then( () => {
-        this.controller.set('emailAddress' , '');
-        this.controller.set('password' , '');
-
-      });
+    registerUser(){
+      let model = this.controller.get('model');
+      var email = model.get('emailAddress');
+      var password = model.get('password');
+      var ref = this.get('firebaseApp');
+      var _this = this;
+      ref.auth().createUserWithEmailAndPassword(
+            email,
+            password
+          ).catch(function(error, userData){
+            if(error) {
+            alert(error);
+            } else {
+              _this.get('session').open('firebase', {
+              provider    : 'password',
+              'email'     : email,
+              'password'  : password,
+            });
+            var user = _this.store.createRecord('admin',{
+              id : userData.uid,
+              emailAddress  : email,
+              password      : password,
+            });
+            user.save().then(() => {
+              _this.transitionTo('consultlist');
+            });
+          }
+      }
+    );
+      //newUser.save().then(()=> this.transitionTo('consultlist'));
     },
     willTransition() {
       let model = this.controller.get('model');

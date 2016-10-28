@@ -103,7 +103,7 @@ LOGIN FORM
 *******************/
 
 .login-form {
-	width: 300px;
+	width: 350px;
 	margin: 0 auto;
 	position: relative;
 
@@ -151,7 +151,7 @@ CONTENT
 
 /* Input field */
 .login-form .content .input {
-	width: 188px;
+	width: 300px;
 	padding: 15px 25px;
 
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -204,12 +204,12 @@ CONTENT
 }
 
 .user-icon {
-	top:170px; /* Positioning fix for slide-in, got lazy to think up of simpler method. */
-	background: rgba(65,72,72,0.75) url('/assets/images/login image.png') no-repeat center;
+	top:160px; /* Positioning fix for slide-in, got lazy to think up of simpler method. */
+	background: $black url('/assets/images/login image.png') no-repeat center;
 }
 .pass-icon {
-	top:230px;
-	background: rgba(65,72,72,0.75) url('/assets/images/password.jpg') no-repeat center;
+	top:210px;
+	background: $black url('/assets/images/password.jpg') no-repeat center;
 }
 
 .content input:focus + div{

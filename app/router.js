@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('design');
   this.route('advice');
   this.route('service');
+  this.route('consultlist');
 });
 
 export default Router;

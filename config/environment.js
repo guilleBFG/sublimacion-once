@@ -13,7 +13,9 @@ module.exports = function(environment) {
       storageBucket: "sublimaciononce.appspot.com",
       messagingSenderId: "497105580114"
     },
-
+    torii: {
+      sessionServiceName: 'session'
+    },
     // if using ember-cli-content-security-policy
     contentSecurityPolicy: {
       'script-src': "'self' 'unsafe-eval' apis.google.com",
