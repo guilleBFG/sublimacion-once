@@ -1,2 +1,12 @@
-{{outlet}}
-<h1>lista de pedidos</h1>
+<h1>Lista de pedidos</h1>
+<hr class="featurette-divider">
+{{#each model as |contact|}}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{contact.emailAddress}}</h3>
+    </div>
+    <div class="panel-body">
+      <p>Mensaje: {{contact.message}}</p>
+    </div>
+  </div>
+{{/each}}
