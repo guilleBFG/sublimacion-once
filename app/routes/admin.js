@@ -7,9 +7,9 @@ export default Ember.Route.extend({
   },
   actions: {
     logIn() {
-        let model = this.controller.get('model');
-        var email = model.get('emailAddress');
-        var password = model.get('password');
+        let model     = this.controller.get('model');
+        var email     = model.get('emailAddress');
+        var password  = model.get('password');
         this.get('session').open('firebase', {
               provider: 'password',
               email: email,
@@ -18,44 +18,36 @@ export default Ember.Route.extend({
               this.transitionTo('consultlist');
             }.bind(this));
     },
-    registerUser(){
+    registerUser(newUser){
+
       let model = this.controller.get('model');
       var email = model.get('emailAddress');
       var password = model.get('password');
       var ref = this.get('firebaseApp');
-      var _this = this;
-      ref.auth().createUserWithEmailAndPassword(
-            email,
-            password
-          ).catch(function(error, userData){
-            if(error) {
-            alert(error);
-            } else {
-              _this.get('session').open('firebase', {
-              provider    : 'password',
-              'email'     : email,
-              'password'  : password,
-            });
-            var user = _this.store.createRecord('admin',{
-              id : userData.uid,
-              emailAddress  : email,
-              password      : password,
-            });
-            user.save().then(() => {
-              _this.transitionTo('consultlist');
-            });
-          }
-      }
-    );
-      //newUser.save().then(()=> this.transitionTo('consultlist'));
+      var _error;
+      ref.auth().createUserWithEmailAndPassword( email, password).catch(
+        function(error)
+        {
+          _error = error;
+
+        }
+      ).then(() => {
+        if (!_error) {
+          newUser.save().then( () => {
+             this.controller.set('emailAddress', '');
+             this.controller.set('password','');
+           });
+          this.transitionTo('consultlist');
+        }else {
+          alert(_error);
+        }
+      });
     },
     willTransition() {
       let model = this.controller.get('model');
-
       if (model.get('isNew')) {
-        model.destroyRecord();
+        this.controller.set('model' , null);
       }
-
     }
   }
 });

@@ -8,6 +8,7 @@ export default Ember.Route.extend({
     }
   },
   model(){
+    console.log(this.store.findAll('contact'));
     return this.store.findAll('contact');
   },
   afterModel(){
